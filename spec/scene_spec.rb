@@ -45,4 +45,19 @@ describe Scene do
     end
   end
   
+  describe '.display' do
+    it 'sets up the peripheral and reshape callbacks' do
+      Object.should_receive(:glutDisplayFunc)
+      Object.should_receive(:glutKeyboardFunc)
+      Object.should_receive(:glutMouseFunc)
+      Object.should_receive(:glutReshapeFunc)
+      Scene.display
+    end
+    
+    it 'starts the graphics rendering loop' do
+      Object.should_receive(:glutMainLoop)
+      Scene.display
+    end
+  end
+  
 end

@@ -19,15 +19,29 @@ class Scene
     glOrtho(0, 1, 0, 1, -1, 1)
   end
   
-  # def self.display(*args)
-  #   initialize
-  #   
-  #   glutDisplayFunc(Proc.new { display_callback(*args) })
-  #   glutKeyboardFunc(Proc.new { |key, x, y| keyboard_callback(key, x, y) })
-  #   glutMouseFunc(Proc.new { mouse_callback })
-  #   
-  #   glutMainLoop
-  # end
+  def self.display(*args)
+    initialize
+    
+    glutDisplayFunc(Proc.new { display_callback(*args) })
+    glutKeyboardFunc(Proc.new { keyboard_callback })
+    glutMouseFunc(Proc.new { mouse_callback })
+    glutReshapeFunc(Proc.new { reshape_callback })
+    
+    glutMainLoop
+  end
+  
+  def self.display_callback
+  end
+  
+  def self.keyboard_callback
+  end
+  
+  def self.mouse_callback
+  end
+  
+  def self.reshape_callback
+  end
+  
   # 
   # def self.display_callback(*args)
   #   glClear(GL_COLOR_BUFFER_BIT)
