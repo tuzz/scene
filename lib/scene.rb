@@ -1,7 +1,10 @@
+require 'scene/default_scene'
 require 'opengl'
 include Gl, Glu, Glut
 
 class Scene
+  
+  include DefaultScene
   
   def self.display(*args)
     initialize
@@ -12,19 +15,6 @@ class Scene
     glutReshapeFunc(Proc.new { reshape(width, height) })
     
     glutMainLoop
-  end
-  
-  def display
-  end
-  
-  def keyboard(key, x, y)
-    exit(0) if key == '\e' or key == 'q'
-  end
-  
-  def mouse(button, state, x, y)
-  end
-  
-  def reshape
   end
   
 private
