@@ -2,6 +2,12 @@ require 'spec_helper'
 
 describe Scene do
   
+  before do
+    [:display, :timer, :keyboard, :mouse, :reshape].each do |method|
+      Scene.any_instance.stub(method)
+    end
+  end
+  
   describe '.instance' do
     it 'creates a new instance if one does not already exist' do
       instance = Scene.instance
@@ -16,8 +22,8 @@ describe Scene do
       Scene.send(:initialize)
     end
     
-    it 'uses rgb display mode with double buffering' do
-      bitwise_argument = GLUT_DOUBLE | GLUT_RGB
+    it 'uses double buffering, rgb display mode and depth mode' do
+      bitwise_argument = GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH
       Object.should_receive(:glutInitDisplayMode).with(bitwise_argument)
       Scene.send(:initialize)
     end
@@ -37,10 +43,21 @@ describe Scene do
       Scene.send(:initialize)
     end
     
-    it 'uses orthographic viewing in a unit cube' do
+    it 'enables depth tests' do
+      Object.should_receive(:glEnable).with(GL_DEPTH_TEST)
+      Scene.send(:initialize)
+    end
+    
+    it 'uses perspective viewing with FOV=60, scale=1, zNear=1 and zFar=10' do
       Object.should_receive(:glMatrixMode).with(GL_PROJECTION)
-      Object.should_receive(:glLoadIdentity)
-      Object.should_receive(:glOrtho).with(0, 1, 0, 1, -1, 1)
+      Object.should_receive(:gluPerspective).with(60, 1, 1, 10)
+      Scene.send(:initialize)
+    end
+    
+    it "positions the camera at 0, 0, -4, focussing on the origin with 'y' representing 'up'" do
+      Object.should_receive(:glMatrixMode).with(GL_MODELVIEW)
+      position = [0, 0, -4]; focus = [0, 0, 1]; up = [0, 1, 0]
+      Object.should_receive(:gluLookAt).with(*(position + focus + up))
       Scene.send(:initialize)
     end
     
@@ -53,6 +70,7 @@ describe Scene do
   describe '.display' do
     it 'sets up the peripheral and reshape callbacks' do
       Object.should_receive(:glutDisplayFunc)
+      Object.should_receive(:glutTimerFunc)
       Object.should_receive(:glutKeyboardFunc)
       Object.should_receive(:glutMouseFunc)
       Object.should_receive(:glutReshapeFunc)
@@ -67,7 +85,8 @@ describe Scene do
   
   describe '.display_proxy' do
     it 'clears the display buffer' do
-      Object.should_receive(:glClear).with(GL_COLOR_BUFFER_BIT)
+      bitwise_argument = GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT
+      Object.should_receive(:glClear).with(bitwise_argument)
       Scene.send(:display_proxy)
     end
     
@@ -80,10 +99,24 @@ describe Scene do
       Object.should_receive(:glutSwapBuffers)
       Scene.send(:display_proxy)
     end
+  end
+  
+  describe '.timer_proxy' do
+    it 'passes the elapsed time between calls into the timer instance method' do
+      Scene.instance_variable_set(:@time, 50)
+      Time.stub(:now).and_return(60)
+      Scene.instance.should_receive(:timer).with(10)
+      Scene.timer_proxy
+    end
     
-    it 'sleeps for 10 milliseconds to prevent 100% CPU usage' do
-      Object.should_receive(:sleep).with(0.01)
-      Scene.send(:display_proxy)
+    it 'sends a message requesting a redisplay' do
+      Object.should_receive(:glutPostRedisplay)
+      Scene.timer_proxy
+    end
+    
+    it 'sets a new timer' do
+      Object.should_receive(:glutTimerFunc)
+      Scene.timer_proxy
     end
   end
   
