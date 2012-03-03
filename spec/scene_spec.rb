@@ -43,6 +43,11 @@ describe Scene do
       Object.should_receive(:glOrtho).with(0, 1, 0, 1, -1, 1)
       Scene.initialize
     end
+    
+    it 'allows settings to be overriden by the instance initializer' do
+      Scene.should_receive(:instance)
+      Scene.initialize
+    end
   end
   
   describe '.display' do
