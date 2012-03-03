@@ -1,6 +1,6 @@
 ## Introduction
 
-Super Simple Scene is a gem that attempts to make things as easy as possible to get started with OpenGL. It handles all of the messy window setup and provides sensible defaults various things. Under the hood it uses the GLUT windowing system, which is well-known and widely documented. It has been tested in Ruby 1.8.7+ on Mac OSX Snow Leopard.
+Super Simple Scene is a gem that attempts to make things as easy as possible to get started with OpenGL. It handles all of the messy window setup and provides sensible defaults for various things. Under the hood it uses the GLUT windowing system, which is well-known and widely documented. It has been tested in Ruby 1.8.7+ on Mac OSX Snow Leopard.
 
 <img src='http://i44.tinypic.com/veyp3.png' width="400" height="400" />
 
