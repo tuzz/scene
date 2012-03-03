@@ -3,6 +3,32 @@ include Gl, Glu, Glut
 
 class Scene
   
+  def self.display(*args)
+    initialize
+    
+    glutDisplayFunc(Proc.new { display_proxy(*args) })
+    glutKeyboardFunc(Proc.new { |key, x, y| keyboard_proxy(key, x, y) })
+    glutMouseFunc(Proc.new { |button, state, x, y| mouse(button, state, x, y) })
+    glutReshapeFunc(Proc.new { reshape(width, height) })
+    
+    glutMainLoop
+  end
+  
+  def display
+  end
+  
+  def keyboard(key, x, y)
+    exit(0) if key == '\e' or key == 'q'
+  end
+  
+  def mouse(button, state, x, y)
+  end
+  
+  def reshape
+  end
+  
+private
+  
   def self.instance
     @instance ||= new
   end
@@ -20,17 +46,6 @@ class Scene
     instance # Allow initializer overrides
   end
   
-  def self.display(*args)
-    initialize
-    
-    glutDisplayFunc(Proc.new { display_proxy(*args) })
-    glutKeyboardFunc(Proc.new { |key, x, y| keyboard_proxy(key, x, y) })
-    glutMouseFunc(Proc.new { |button, state, x, y| mouse(button, state, x, y) })
-    glutReshapeFunc(Proc.new { reshape(width, height) })
-    
-    glutMainLoop
-  end
-  
   def self.display_proxy(*args)
     glClear(GL_COLOR_BUFFER_BIT)
     instance.display(*args)
@@ -40,19 +55,6 @@ class Scene
   
   def self.keyboard_proxy(key, x, y)
     instance.keyboard(key.chr, x, y)
-  end
-  
-  def display
-  end
-  
-  def keyboard(key, x, y)
-    exit(0) if key == '\e' or key == 'q'
-  end
-  
-  def mouse(button, state, x, y)
-  end
-  
-  def reshape
   end
   
 end
