@@ -60,4 +60,26 @@ describe Scene do
     end
   end
   
+  describe '.display_callback' do
+    it 'clears the display buffer' do
+      Object.should_receive(:glClear).with(GL_COLOR_BUFFER_BIT)
+      Scene.display_callback
+    end
+    
+    it 'calls display on the instance' do
+      Scene.instance.should_receive(:display)
+      Scene.display_callback
+    end
+    
+    it 'swaps out the display buffers' do
+      Object.should_receive(:glutSwapBuffers)
+      Scene.display_callback
+    end
+    
+    it 'sleeps for 10 milliseconds to prevent 100% CPU usage' do
+      Object.should_receive(:sleep).with(0.01)
+      Scene.display_callback
+    end
+  end
+  
 end

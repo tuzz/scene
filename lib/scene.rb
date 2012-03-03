@@ -30,7 +30,11 @@ class Scene
     glutMainLoop
   end
   
-  def self.display_callback
+  def self.display_callback(*args)
+    glClear(GL_COLOR_BUFFER_BIT)
+    instance.display(*args)
+    glutSwapBuffers
+    sleep(0.01)
   end
   
   def self.keyboard_callback
@@ -42,14 +46,9 @@ class Scene
   def self.reshape_callback
   end
   
-  # 
-  # def self.display_callback(*args)
-  #   glClear(GL_COLOR_BUFFER_BIT)
-  #   instance.display(*args)
-  #   glutSwapBuffers
-  #   sleep(0.1)
-  # end
-  # 
+  def display
+  end
+  
   # def self.keyboard_callback(key, x, y)
   #   instance.defined? keyboard(key.chr, x, y)
   # end
