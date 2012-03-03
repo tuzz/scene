@@ -23,9 +23,9 @@ class Scene
     initialize
     
     glutDisplayFunc(Proc.new { display_callback(*args) })
-    glutKeyboardFunc(Proc.new { keyboard_callback })
-    glutMouseFunc(Proc.new { mouse_callback })
-    glutReshapeFunc(Proc.new { reshape_callback })
+    glutKeyboardFunc(Proc.new { |key, x, y| keyboard_proxy(key, x, y) })
+    glutMouseFunc(Proc.new { |button, state, x, y| mouse(button, state, x, y) })
+    glutReshapeFunc(Proc.new { reshape })
     
     glutMainLoop
   end
@@ -37,10 +37,8 @@ class Scene
     sleep(0.01)
   end
   
-  def self.keyboard_callback
-  end
-  
-  def self.mouse_callback
+  def self.keyboard_proxy(key, x, y)
+    instance.keyboard(key.chr, x, y)
   end
   
   def self.reshape_callback
@@ -49,18 +47,14 @@ class Scene
   def display
   end
   
-  # def self.keyboard_callback(key, x, y)
-  #   instance.defined? keyboard(key.chr, x, y)
-  # end
-  # 
-  # def self.mouse_callback
-  # end
-  # 
-  # def keyboard(key, x, y)
-  #   exit(0) if key == '\e'
-  # end
-  # 
-  # def mouse
-  # end
+  def keyboard(key, x, y)
+    exit(0) if key == '\e' or key == 'q'
+  end
+  
+  def mouse(button, state, x, y)
+  end
+  
+  def reshape
+  end
   
 end

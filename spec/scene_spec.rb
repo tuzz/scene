@@ -82,4 +82,11 @@ describe Scene do
     end
   end
   
+  describe '.keyboard_proxy' do
+    it 'calls keybaord after casting the key to a character' do
+      Scene.instance.should_receive(:keyboard).with('A', 1, 2)
+      Scene.keyboard_proxy(65, 1, 2)
+    end
+  end
+  
 end
