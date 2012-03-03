@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name        = 'scene'
   s.version     = '0.0.1'
-  s.date        = '2012-03-01'
+  s.date        = '2012-03-03'
   s.summary     = 'Super simple scenes using OpenGL'
   s.description = 'Super simple scenes using OpenGL'
   s.author      = 'Christopher Patuzzo'
