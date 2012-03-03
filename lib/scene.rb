@@ -11,8 +11,8 @@ class Scene
     
     glutDisplayFunc(Proc.new { display_proxy(*args) })
     glutKeyboardFunc(Proc.new { |key, x, y| keyboard_proxy(key, x, y) })
-    glutMouseFunc(Proc.new { |button, state, x, y| mouse(button, state, x, y) })
-    glutReshapeFunc(Proc.new { reshape(width, height) })
+    glutMouseFunc(Proc.new { |button, state, x, y| instance.mouse(button, state, x, y) })
+    glutReshapeFunc(Proc.new { |width, height| instance.reshape(width, height) })
     
     glutMainLoop
   end
@@ -33,6 +33,7 @@ private
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity
     glOrtho(0, 1, 0, 1, -1, 1)
+    glMatrixMode(GL_MODELVIEW)
     instance # Allow initializer overrides
   end
   
