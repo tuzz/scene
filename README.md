@@ -1,6 +1,6 @@
 ## Introduction
 
-Super Simple Scene is a gem that attempts to make things as easy as possible to get started with OpenGL. It handles all of the messy window setup and provides sensible defaults for various things. Under the hood it uses the GLUT windowing system, which is well-known and widely documented. It has been tested in Ruby 1.8.7+ on Mac OSX Snow Leopard.
+Super Simple Scene is a gem that attempts to make things as easy as possible to get started with OpenGL. It handles all of the messy window setup and provides sensible defaults for various things. Under the hood it uses the GLUT windowing system, which is well-known and widely documented. It has been tested in Ruby 1.8.7+ on Mac OSX Snow Leopard and Windows 7 x64.
 
 <img src='http://i44.tinypic.com/veyp3.png' width="400" height="400" />
 
@@ -19,6 +19,10 @@ require 'scene'
 ```
 
 You may need to require 'rubygems' too, if you are running an old version of Ruby.
+
+**Windows users:**
+
+You'll need the glut dll, which you can download [here](http://dl.dropbox.com/u/5490406/github/glut32.dll). Copy that into your Windows > SysWOW64 folder, or System32 if you don't have that.
 
 **Running the default scene:**
 
