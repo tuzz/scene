@@ -22,7 +22,7 @@ class Scene
   def self.display(*args)
     initialize
     
-    glutDisplayFunc(Proc.new { display_callback(*args) })
+    glutDisplayFunc(Proc.new { display_proxy(*args) })
     glutKeyboardFunc(Proc.new { |key, x, y| keyboard_proxy(key, x, y) })
     glutMouseFunc(Proc.new { |button, state, x, y| mouse(button, state, x, y) })
     glutReshapeFunc(Proc.new { reshape })
@@ -30,7 +30,7 @@ class Scene
     glutMainLoop
   end
   
-  def self.display_callback(*args)
+  def self.display_proxy(*args)
     glClear(GL_COLOR_BUFFER_BIT)
     instance.display(*args)
     glutSwapBuffers
@@ -39,9 +39,6 @@ class Scene
   
   def self.keyboard_proxy(key, x, y)
     instance.keyboard(key.chr, x, y)
-  end
-  
-  def self.reshape_callback
   end
   
   def display
