@@ -22,7 +22,7 @@ You may need to require 'rubygems' too, if you are running an old version of Rub
 
 **Windows users:**
 
-You'll need the glut dll, which you can download [here](http://dl.dropbox.com/u/5490406/github/glut32.dll). Copy that into your Windows > SysWOW64 folder, or System32 if you don't have that.
+You'll need the GLUT dynamic link library, which you can download [here](http://dl.dropbox.com/u/5490406/github/glut32.dll). Copy that into your Windows > SysWOW64 folder, or System32 if you don't have that.
 
 **Running the default scene:**
 
