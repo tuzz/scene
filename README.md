@@ -135,4 +135,6 @@ end
 
 Please feel free to contribute, either through pull requests or feature requests here on Github.
 
+I'm thinking of including several default scenes in the gem. If you have something cool, let me know and it might get included!
+
 For news and latest updates, follow me on Twitter ([@cpatuzzo](https://twitter.com/#!/cpatuzzo)).
