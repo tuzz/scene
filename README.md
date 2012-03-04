@@ -81,10 +81,10 @@ The display method will be called every 10 milliseconds, or thereabouts- dependi
 def display
   glColor3f(1, 0, 0)
   glBegin(GL_POLYGON)
-    glVertex3f(-1, -1, 0)
-    glVertex3f(-1, 1, 0)
-    glVertex3f(1, 1, 0)
     glVertex3f(1, -1, 0)
+    glVertex3f(1, 1, 0)
+    glVertex3f(-1, 1, 0)
+    glVertex3f(-1, -1, 0)
   glEnd
 end
 ```
