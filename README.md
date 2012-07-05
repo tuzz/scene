@@ -36,25 +36,25 @@ Press H to display help in the terminal.
 
 ```ruby
 class MyScene < Scene
-  
+
   def initialize
   end
-  
+
   def display
   end
-  
+
   def timer(elapsed)
   end
-  
+
   def keyboard(key, x, y)
   end
-  
+
   def mouse(button, state, x, y)
   end
-  
+
   def reshape(width, height)
   end
-  
+
 end
 
 MyScene.display
@@ -93,7 +93,7 @@ The camera is positioned at 0, 0, -4 and is focussed on the origin by default. F
 
 ## Timer
 
-The timer method is called after each frame is drawn. This is a good place to control animations, for example, you could rotate by x many degrees every time this method is called. Is is given the elapsed time since the previous timer method was called. This allows for building time-accurate animations. It is also a good indication of whether or not your machine is struggling to display the animation if it strays too far from 10ms.
+The timer method is called after each frame is drawn. This is a good place to control animations, for example, you could rotate by x many degrees every time this method is called. It is given the elapsed time since the previous timer method was called. This allows for building time-accurate animations. It is also a good indication of whether or not your machine is struggling to display the animation if it strays too far from 10ms.
 
 ```ruby
 def timer(elapsed)
