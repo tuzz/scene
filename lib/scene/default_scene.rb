@@ -67,7 +67,7 @@ module DefaultScene
       puts 'Middle click : Inverse y-rotation'
       puts 'Right click  : Inverse z-rotation'
       puts
-      puts 'Visit https://github.com/cpatuzzo/scene for more information'
+      puts 'Visit https://github.com/tuzz/scene for more information'
     when 'o'
       @show_outline = !@show_outline
     end
